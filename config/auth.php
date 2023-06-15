@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Contracts\Auth\UserProvider;
 
 return [
 
@@ -38,7 +39,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'clients',
+            'provider' => 'users',
         ],
     ],
 
@@ -110,6 +111,6 @@ return [
     |
     */
 
-    'password_timeout' => 1440,
+    'password_timeout' => 10800,
 
 ];
