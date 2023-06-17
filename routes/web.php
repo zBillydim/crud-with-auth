@@ -36,10 +36,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/veiculo', [VeiculoController::class, 'index'])->name('cadastroveiculo');
 
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home');
-
     Route::get('/perfil', function () {
         return view('perfil');
     })->name('perfil');

@@ -3,6 +3,7 @@
 <head>
     <title>Criação de Veículos</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -22,9 +23,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Home</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/perfil">Perfil <i class="fa fa-user"></i></a>
                 </li>
@@ -62,8 +60,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="km_rodados">Km Rodados *</label>
-                                    <input type="number" class="form-control" id="km_rodados" name="km_rodados" required>
+                                    <label for="km_rodados">Km Rodados * </label>
+                                    <input type="text" class="form-control" id="km_rodados" name="km_rodados" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -83,13 +81,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="placa">Placa *</label>
-                                    <input type="text" class="form-control" id="placa" name="placa" required>
+                                    <input type="text" class="form-control" id="placa" name="placa" maxlength="7" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="cpf">CPF *</label>
-                                    <input type="text" class="form-control" id="cpf" name="cpf" required>
+                                    <input type="text" class="form-control" id="cpf" placeholder="___.___.___-__" name="cpf" required>
                                 </div>
                             </div>
                         </div>
@@ -97,13 +95,37 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="numero">Número *</label>
-                                    <input type="text" class="form-control" id="numero" name="numero" required>
+                                    <input type="text" class="form-control" id="numero" placeholder="(__) _____-____"name="numero" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="endereco">Endereço *</label>
-                                    <input type="text" class="form-control" id="endereco" name="endereco" required>
+                                    <label for="cep">CEP *</label>
+                                    <input type="text" class="form-control" id="cep" placeholder="_____-___" name="cep" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Bairro">Bairro *</label>
+                                    <input type="text" class="form-control" id="bairro" name="bairro" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Rua">Rua *</label>
+                                    <input type="text" class="form-control" id="rua" name="rua" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="numero_casa">Nº *</label>
+                                    <input type="text" class="form-control" id="numero_casa" name="numero_casa" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="complemento">Complemento *</label>
+                                    <input type="text" class="form-control" id="complemento" name="complemento" required>
                                 </div>
                             </div>
                         </div>
@@ -116,10 +138,27 @@
                 </div>
             </form>
     </div>
+    <br>
+    <footer class="bg-dark text-white text-center py-2 bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                        Desenvolvido por <a style="text-decoration: none;"href="https://github.com/zbillydim"  target="_blank">Gabriel C.</a>
+                    <br>
+                    <a style="text-decoration: none;" href="https://github.com/zbillydim"><i class="fab fa-github github-icon">  Github</i>  </a>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script>
+        // abrir página executa essa função
         $(document).ready(function() {
             $('#cpf').inputmask('999.999.999-99');
             $('#numero').inputmask('(99) 99999-9999');
+            $('#cep').inputmask('99999-999');
+            $('#km_rodados').on('input', function() {
+                $(this).val($(this).val().replace(/\D/g, ''));
+            });
         });
     </script>
 </body>
