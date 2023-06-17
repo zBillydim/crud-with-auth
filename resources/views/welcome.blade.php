@@ -27,6 +27,7 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
         </div>
     </nav>
     @if(Session::has('logout_message'))
