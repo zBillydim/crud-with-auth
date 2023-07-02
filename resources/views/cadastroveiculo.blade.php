@@ -37,8 +37,16 @@
             </ul>
         </div>
     </nav>
+    @if(Session::has('register_success'))
+    <div id="alerta" class="alert alert-success mt-3 mx-auto" style="max-width: 300px;" role="alert">
+        {{ Session::get('register_success') }}
+        <button type="button" class="close" onclick="fecha(event)" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="container">
-        <h1>Cadastro de Veículos</h1>
+        <h1 class="mb-3">Cadastro de Veículos</h1>
             <form method="POST" action="/cadastro-veiculo">
                 @csrf
                 <div class="card">
@@ -138,20 +146,16 @@
                 </div>
             </form>
     </div>
-    <br>
-    <footer class="bg-dark text-white text-center py-2 bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                        Desenvolvido por <a style="text-decoration: none;"href="https://github.com/zbillydim"  target="_blank">Gabriel C.</a>
-                    <br>
-                    <a style="text-decoration: none;" href="https://github.com/zbillydim"><i class="fab fa-github github-icon">  Github</i>  </a>
-                </div>
-            </div>
+    <footer id="footer" class="bg-dark text-white text-center py-2 bottom">
+        <div class="container text-center">
+          <div class="col">
+            Desenvolvido por <a style="text-decoration: none;" href="https://github.com/zbillydim" target="_blank">Gabriel C.</a>
+            <br>
+            <a style="text-decoration: none;" href="https://github.com/zbillydim"><i class="fab fa-github github-icon">  Github</i></a>
+          </div>
         </div>
-    </footer>
+      </footer>
     <script>
-        // abrir página executa essa função
         $(document).ready(function() {
             $('#cpf').inputmask('999.999.999-99');
             $('#numero').inputmask('(99) 99999-9999');
@@ -159,6 +163,18 @@
             $('#km_rodados').on('input', function() {
                 $(this).val($(this).val().replace(/\D/g, ''));
             });
+
+            var footer = $('#footer');
+
+       
+                var windowWidth = $(window).width();
+
+                if(windowWidth >= 769){
+                    footer.addClass('fixed-bottom');
+                }else{
+                    footer.addClass('bottom');
+                }
+            
         });
     </script>
 </body>

@@ -31,4 +31,15 @@ class Cliente extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
+    public function scopeVerifyHasEmail($query, $email){
+        return $query->where('email', $email);
+
+        $existingClient = Cliente::where('email', $value)->first();
+
+        if ($existingClient) {
+            $errorMessage = ['Email já utilizado, por favor utilize outro.'];
+            return redirect('/')->withErrors($errorMessage);
+        }
+    }
+    
 }

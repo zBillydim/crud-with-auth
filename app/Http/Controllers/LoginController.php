@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -17,21 +18,30 @@ class LoginController extends Controller
         }
     }
 
-    public function register(Request $request){
-        $email = $request->input('email');
-
-        $existingClient = Cliente::where('email', $email)->first();
-
-        if ($existingClient) {
-            return response()->json(['error' => "Email já utilizado, por favor utilize outro."], 401);
+    public function register(Request $request){   
+        $emailExists = Cliente::verifyHasEmail($request->input('email'))->exists();
+        
+        if (!$emailExists) {
+            $cliente = Cliente::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+            ]);
+            
+            if ($cliente) {
+                if (Auth::attempt($request->only('email', 'password'))) {
+                    Session::flash('register_success', 'Cadastro realizado com sucesso');
+                    return redirect('/veiculo');
+                }
+            }
+            $errorMessage = 'Erro ao tentar cadastrar usuário, tente novamente mais tarde.';
+    
+            return redirect('/')->withErrors([$errorMessage]);
         }
-
-        Cliente::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ]);
-
-        return response()->json(['success' => "true"], 201);
+        
+        $errorMessage = 'Email já utilizado, por favor utilize outro.';
+    
+        return redirect('/')->withErrors([$errorMessage]);
+       
     }
 }
