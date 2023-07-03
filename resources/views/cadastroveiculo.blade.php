@@ -9,20 +9,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <style>
-        body {
-            padding-top: 50px;
-        }
     </style>
 </head>
 <body>
-    <br>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark top">
         <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/perfil">Perfil <i class="fa fa-user"></i></a>
                 </li>
@@ -45,6 +44,7 @@
         </button>
     </div>
     @endif
+    <br>
     <div class="container">
         <h1 class="mb-3">Cadastro de Veículos</h1>
             <form method="POST" action="/cadastro-veiculo">
@@ -146,7 +146,8 @@
                 </div>
             </form>
     </div>
-    <footer id="footer" class="bg-dark text-white text-center py-2 bottom">
+    <br>
+    <footer id="footer" class="bg-dark text-white text-center py-2">
         <div class="container text-center">
           <div class="col">
             Desenvolvido por <a style="text-decoration: none;" href="https://github.com/zbillydim" target="_blank">Gabriel C.</a>
@@ -164,17 +165,14 @@
                 $(this).val($(this).val().replace(/\D/g, ''));
             });
 
-            var footer = $('#footer');
-
-       
-                var windowWidth = $(window).width();
-
-                if(windowWidth >= 769){
-                    footer.addClass('fixed-bottom');
-                }else{
-                    footer.addClass('bottom');
-                }
-            
+            var footer = $('#footer');       
+            var windowWidth = $(window).height();
+                
+            if(windowWidth <= 768){
+                footer.addClass('bottom');
+            }else{
+                footer.addClass('fixed-bottom');
+            }
         });
     </script>
 </body>
