@@ -40,7 +40,10 @@
 /* Veiculos */
 
 .veiculos{
-
+    display: grid;
+    border: 1px solid rgba(0,0,0,.125);
+    padding: 15px;
+    margin: 117px 20%; 
 }
 }
 
