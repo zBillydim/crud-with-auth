@@ -1,0 +1,186 @@
+.alerta{
+    margin-top: 100px; 
+    }
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: #fefefe;
+}
+
+.login-box {
+  position: relative;
+  width: 500px;
+  height: 550px;
+  left: 10%;
+  background-color: #212529;
+  border: 2px solid black ;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+
+.input-box {
+  position: relative;
+  width: 310px;
+  margin: 30px 0;
+  border-bottom: 2px solid #fff;
+}
+.input-box label {
+  position: absolute;
+  top: 60%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -5px;
+}
+
+.input-box input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #fff;
+  padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+  position: absolute;
+  right: 8px;
+  color: #fff;
+  font-size: 1.2em;
+  line-height: 57px;
+}
+
+.remenber-forgot {
+  margin: -15px 0 15px;
+  font-size: 0.9em;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.remenber-forgot label input {
+  margin-right: 3px;
+}
+
+.remenber-forgot a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.remenber-forgot a:hover {
+  text-decoration: underline;
+}
+
+button {
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #000;
+  font-weight: 500;
+}
+
+.register-link{
+  font-size: .9em;
+  color: #fff;
+  text-align: center;
+  margin: 25px 0 10px;
+
+}
+
+.register-link p a{
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.input-box{
+  width: 290px;
+}
+
+.img {
+  position: relative;
+  width: 600px;
+  height: 300px;
+  right: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.subtitle {
+  position: relative;
+  left: 10%;
+}
+
+.papai{
+  padding: 30px;
+  height: 600px;
+}
+.botao{
+  position: relative;
+  height: auto;
+  top: 210px;
+  right: 220px;
+  width: 150px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin: -15px 0 15px;
+}
+.wrapper{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button{
+  display: block;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #333;
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+  padding: 6px;
+  letter-spacing: 1px;
+  transition: all .25s;
+}
+
+button:hover{
+  letter-spacing: 5px;
+}

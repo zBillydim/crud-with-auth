@@ -21,6 +21,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::post('/register', [LoginController::class, 'register'])->name('register.submit');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -39,6 +40,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', function () {
         return view('perfil');
     })->name('perfil');
+    
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
 });
 
 /* FIM ROTA AUTENTICADA */
