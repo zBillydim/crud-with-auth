@@ -174,6 +174,29 @@ button {
   justify-content: space-between;
   margin: -15px 0 15px;
 }
+.wrapper{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button{
+  display: block;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #333;
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+  padding: 6px;
+  letter-spacing: 1px;
+  transition: all .25s;
+}
+
+button:hover{
+  letter-spacing: 5px;
+}
 </style>
 <body>
 
@@ -243,8 +266,8 @@ button {
               <label><input type="checkbox">Manter login</label>
               <a href="#">Esqueceu a senha?</a>
             </div>
-            <button class="mb-3" type="submit">login</button>           
-            <button  class="mb-3" onclick="toggleForm('registerForm')">Registrar-se</button>           
+            <button class="mb-3" type="submit" class="wrapper">Login</button>           
+            <button class="mb-3" onclick="toggleForm('registerForm')" class="wrapper">Registrar-se</button>           
           </form>
 
           <form action="" id="registerForm" style="display: none"> 
@@ -269,11 +292,7 @@ button {
               <input type="password" required>
               <label>Senha</label>
             </div>
-            <div class="remenber-forgot">
-              <label><input type="checkbox">Manter login</label>
-              <a href="#">Esqueceu a senha?</a>
-            </div>
-            <button class="mb-3" type="submit">Registrar-se</button>           
+            <button class="mb-3" type="submit" class="wrapper">Registrar-se</button>           
             <span style="color: white;">Já tem conta? <a href="#" onclick="toggleForm('loginForm')">Login</a></span>       
           </form> 
       </section>
