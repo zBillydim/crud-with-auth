@@ -14,154 +14,302 @@
     .alerta{
     margin-top: 100px; 
     }
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: #fefefe;
+}
 
+.login-box {
+  position: relative;
+  width: 500px;
+  height: 550px;
+  left: 10%;
+  background-color: #212529;
+  border: 2px solid black ;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+
+.input-box {
+  position: relative;
+  width: 310px;
+  margin: 30px 0;
+  border-bottom: 2px solid #fff;
+}
+.input-box label {
+  position: absolute;
+  top: 60%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -5px;
+}
+
+.input-box input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #fff;
+  padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+  position: absolute;
+  right: 8px;
+  color: #fff;
+  font-size: 1.2em;
+  line-height: 57px;
+}
+
+.remenber-forgot {
+  margin: -15px 0 15px;
+  font-size: 0.9em;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.remenber-forgot label input {
+  margin-right: 3px;
+}
+
+.remenber-forgot a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.remenber-forgot a:hover {
+  text-decoration: underline;
+}
+
+button {
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #000;
+  font-weight: 500;
+}
+
+.register-link{
+  font-size: .9em;
+  color: #fff;
+  text-align: center;
+  margin: 25px 0 10px;
+
+}
+
+.register-link p a{
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.input-box{
+  width: 290px;
+}
+
+.img {
+  position: relative;
+  width: 600px;
+  height: 300px;
+  right: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.subtitle {
+  position: relative;
+  left: 10%;
+}
+
+.papai{
+  padding: 30px;
+  height: 600px;
+}
+.botao{
+  position: relative;
+  height: auto;
+  top: 210px;
+  right: 220px;
+  width: 150px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin: -15px 0 15px;
+}
 </style>
 <body>
-    @if(Auth::check())
-        <script>window.location = "{{ route('cadastroveiculo') }}";</script>
-    @endif
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <div class="container-md">
-            <a class="navbar-brand text-start" href="#">Simple CRUD</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
-    @if(Session::has('logout_message'))
-    <div id="alerta" class="alert alert-success mt-3 mx-auto" style="max-width: 300px;" role="alert">
-        Logout bem sucedido.
-        <button type="button" class="close" onclick="fecha(event)" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
-    @if($errors->any())
-        <script>         
-            window.onload = function() {
-                var teste = $('#error').text();
-                if (teste === 'Email já utilizado, por favor utilize outro.') {
-                    $('#register').click();
-                }
-            };
-        </script>
-        <a id="error" style="display:none">{{ $errors->first() }}</a>
-        <div id="alerta" class="alert alert-danger mt-3 mx-auto" style="max-width: 300px;" role="alert">
-            {{ $errors->first() }}
-            <button type="button" class="close" onclick="fecha(event)" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    <div class="container mb-5">
-        <div class="float-start row" style="width: 468px;">
-            <img class="crud mt-2" src="{{ asset('src/pics/crud.jpeg') }}" id="crud" alt="Imagem do CRUD" style="width: 100%; height: auto;">
-            <span class="d-block mt-4 py-6">
-                A simple CRUD System, developed by: <a style="text-decoration:none;"class="text-error" href="https://github.com/zbillydim" target="_blank">Gabriel C.</a>
-            </span>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <div class="card" style="border-radius: 0,35rem">
-                    <div class="card-body">
-                        {{-- inicio form login --}}
-                        <form id="loginForm" action="{{ route('login.submit') }}" method="POST">
-                            <h1 class="mb-3">Login</h1>
-                            @csrf
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                            {{-- Fim form login --}}
-                            {{-- Inicio form register --}}
-                        <form id="registerForm" action="{{ route('register.submit') }}" method="POST" style="display: none;">
-                            <h1 class="mb-3">Register</h1>
-                            @csrf
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="registerEmail" name="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="registerPassword" name="password" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="repeatPassword" class="form-label">Repeat Password</label>
-                                <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" oninput="validatePassword()" required>
-                                <div id="passwordError" class="invalid-feedback">As senhas não coincidem</div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </form>
-                        {{-- Fim form register --}}
-                    </div>
-                    <div class="card-footer">
-                        <div class="text-center">
-                            <button class="btn btn-link" onclick="toggleForm('loginForm')">Login</button>
-                            <button id="register" class="btn btn-link" onclick="toggleForm('registerForm')">Register</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer class="bg-dark text-white text-center py-2 fixed-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                        Desenvolvido por <a style="text-decoration: none;"href="https://github.com/zbillydim"  target="_blank">Gabriel C.</a>
-                    <br>
-                    <a style="text-decoration: none;" href="https://github.com/zbillydim"><i class="fab fa-github github-icon">  Github</i>  </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
-    <script>
-        function fecha(event){
-            document.getElementById('alerta').style.display = 'none';
-        }
 
-        function toggleForm(formId) {
+    {{--Barra de navegação--}}
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+      <div class="container-md">
+          <a class="navbar-brand text-start" href="#">Simple CRUD</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+  </nav>
+
+  @if(Session::has('logout_message'))
+  <div id="alerta" class="alert alert-success mt-3 mx-auto" style="max-width: 300px;" role="alert">
+      Logout bem sucedido.
+      <button type="button" class="close" onclick="fecha(event)" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  @endif
+  @if($errors->any())
+      <script>         
+          window.onload = function() {
+              var teste = $('#error').text();
+              if (teste === 'Email já utilizado, por favor utilize outro.') {
+                  $('#register').click();
+              }
+          };
+      </script>
+      <a id="error" style="display:none">{{ $errors->first() }}</a>
+      <div id="alerta" class="alert alert-danger mt-3 mx-auto" style="max-width: 300px;" role="alert">
+          {{ $errors->first() }}
+          <button type="button" class="close" onclick="fecha(event)" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+  @endif
+
+{{--Caixa de login--}}
+
+      <section>
+        <div class="papai">
+        <div class="img">
+          <img class="crud mt-2" src="{{ asset('src/pics/crud.jpeg') }}" id="crud" alt="Imagem do CRUD" style="width: 100%; height: auto;">
+        </div>
+        <span class=subtitle>
+          A simple CRUD System, developed by: <a style="text-decoration:none;"class="text-error" href="https://github.com/zbillydim" target="_blank">Gabriel C.</a>
+      </span>
+      </div>
+      <div class="login-box">
+          <form action="" id="loginForm">
+            <h2>Login</h2>
+            <div class="input-box">
+              <span class="icon"><ion-icon name="mail"></ion-icon></span>
+              <input type="email" required>
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+              <input type="password" required>
+              <label>Senha</label>
+            </div>
+            <div class="remenber-forgot">
+              <label><input type="checkbox">Manter login</label>
+              <a href="#">Esqueceu a senha?</a>
+            </div>
+            <button class="mb-3" type="submit">login</button>           
+            <button  class="mb-3" onclick="toggleForm('registerForm')">Registrar-se</button>           
+          </form>
+
+          <form action="" id="registerForm" style="display: none"> 
+            <h2>Registrar</h2>
+            <div class="input-box">
+              <span class="icon"><ion-icon name="mail"></ion-icon></span>
+              <input type="email" required>
+              <label>Nome</label>
+            </div>  
+            <div class="input-box">
+              <span class="icon"><ion-icon name="mail"></ion-icon></span>
+              <input type="email" required>
+              <label>Sobrenome</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><ion-icon name="mail"></ion-icon></span>
+              <input type="email" required>
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+              <input type="password" required>
+              <label>Senha</label>
+            </div>
+            <div class="remenber-forgot">
+              <label><input type="checkbox">Manter login</label>
+              <a href="#">Esqueceu a senha?</a>
+            </div>
+            <button class="mb-3" type="submit">Registrar-se</button>           
+            <span style="color: white;">Já tem conta? <a href="#" onclick="toggleForm('loginForm')">Login</a></span>       
+          </form> 
+      </section>
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        {{--Foot--}}
+
+        <footer id="footer" class="bg-dark text-white text-center py-2 fixed-bottom">
+          <div class="container text-center">
+            <div class="col">
+              Desenvolvido por <a style="text-decoration: none;" href="https://github.com/zbillydim" target="_blank">Gabriel C., Enzo P.</a>
+              <br>
+              <a style="text-decoration: none;" href="https://github.com/zbillydim"><i class="fab fa-github github-icon">  Github</i></a>
+            </div>
+          </div>
+        </footer>
+
+        {{--Java--}}
+
+        <script>
+          function fecha(event){
+              document.getElementById('alerta').style.display = 'none';
+          }
+  
+          function toggleForm(formId) {
+            console.log('A');
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('registerForm').style.display = 'none';
             document.getElementById(formId).style.display = 'block';
-        }
-
-        function validatePassword() {
-            var password = document.getElementById("registerPassword").value;
-            var repeatPassword = document.getElementById("repeatPassword").value;
-            var passwordError = document.getElementById("passwordError");
-
-            if (password !== repeatPassword) {
-                passwordError.style.display = 'block';
-                document.getElementById("repeatPassword").setCustomValidity("As senhas não coincidem");
-            } else {
-                passwordError.style.display = 'none';
-                document.getElementById("repeatPassword").setCustomValidity("");
-            }
-        }
-
-        document.getElementById("registerForm").addEventListener("submit", function(event) {
-            validatePassword();
-
-            if (!this.checkValidity()) {
-                event.preventDefault();
-            }
-        });
-
-        document.getElementById("registerPassword").addEventListener("input", validatePassword);
-        document.getElementById("repeatPassword").addEventListener("input", validatePassword);
-    </script>
+          }
+  
+          
+  
+          
+      </script>
 </body>
 </html>
