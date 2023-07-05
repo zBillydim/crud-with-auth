@@ -16,7 +16,16 @@
     <script>window.location = "{{ route('cadastroveiculo') }}";</script>
   @endif
     {{--Barra de navegação--}}
-    
+    {{-- esperando do enzo arruma meu layout 
+      @if(Session::has('logout_message'))
+    <div id="alerta" class="alert alert-success mt-3 mx-auto" style="max-width: 300px;" role="alert">
+        Logout bem sucedido.
+        <button type="button" class="close" onclick="fecha(event)" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif 
+    --}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
       <div class="container-md">
           <a class="navbar-brand text-start" href="#">Simple CRUD</a>
@@ -26,15 +35,6 @@
           </button>
       </div>
   </nav>
-
-  @if(Session::has('logout_message'))
-  <div id="alerta" class="alert alert-success mt-3 mx-auto" style="max-width: 300px;" role="alert">
-      Logout bem sucedido.
-      <button type="button" class="close" onclick="fecha(event)" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-      </button>
-  </div>
-  @endif
 
   @if($errors->any())
       <script>         
@@ -53,7 +53,9 @@
           </button>
       </div>
   @endif
+
 {{--Caixa de login--}}
+
       <section>
         <div class="papai">
         <div class="img">
@@ -78,7 +80,7 @@
               <label for="password">Senha</label>
             </div>
             <div class="remenber-forgot">
-              <form action="" method="POST" href="#">Esqueceu a senha?</form>
+              <a href="#">Esqueceu a senha?</a>
             </div>
             <button class="mb-3" type="submit" class="wrapper">Login</button>           
             <button class="mb-3" onclick="toggleForm('registerForm')" class="wrapper">Registrar-se</button>           
@@ -129,7 +131,7 @@
 
         {{--Java--}}
 
-      <script>
+        <script>
           function fecha(event){
               document.getElementById('alerta').style.display = 'none';
           }
