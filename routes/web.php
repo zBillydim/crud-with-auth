@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\LogoutController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 /* INICIO ROTAS PUBLICAS */
 
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
@@ -34,7 +35,7 @@ Route::get('/login', function () {
 /* INICIO ROTA AUTENTICADA */
 
 Route::middleware(['auth'])->group(function () {
-
+    Route::post('/createVehicle', [VeiculoController::class, 'create'])->name('create.vehicle');
     Route::get('/veiculo', [VeiculoController::class, 'index'])->name('cadastroveiculo');
 
     Route::get('/perfil', function () {

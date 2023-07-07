@@ -47,10 +47,18 @@
         </button>
     </div>
     @endif
+    @if(Session::has('failed_register'))
+    <div id="alerta" class="alert alert-danger mt-3 mx-auto" style="max-width: 300px;" role="alert">
+        {{ Session::get('failed_register') }}
+        <button type="button" class="close" onclick="fecha(event)" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <br>
     <div class="container">
         <h1 class="mb-3">Cadastro de Veículos</h1>
-            <form method="POST" action="/cadastro-veiculo">
+            <form method="POST" action="{{ route('create.vehicle') }}">
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -58,7 +66,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="marca">Marca *</label>
-                                    <input type="text" class="form-control" id="marca" name="marca" required>
+                                    <input type="text" class="form-control" id="marca" name="marca" required >
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -78,7 +86,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="combustivel">Tipo de Combustível *</label>
-                                    <select class="form-control" id="combustivel" name="combustivel" required>
+                                    <select class="form-control" id="combustivel" name="combustivel" required >
                                         <option value="gasolina">Gasolina</option>
                                         <option value="etanol">Etanol</option>
                                         <option value="diesel">Diesel</option>
@@ -105,40 +113,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="numero">Número *</label>
-                                    <input type="text" class="form-control" id="numero" placeholder="(__) _____-____"name="numero" required>
+                                    <label for="numero">Número celular/whatsapp</label>
+                                    <input type="text" class="form-control" id="numero" placeholder="(__) _____-____" name="numero" >
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="cep">CEP *</label>
-                                    <input type="text" class="form-control" id="cep" placeholder="_____-___" name="cep" required>
+                                    <label for="status">Status *</label>
+                                    <select class="form-control" id="status" name="status" required >
+                                        <option value="Ativo">Ativo</option>
+                                        <option value="Desativado">Desativado</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Bairro">Bairro *</label>
-                                    <input type="text" class="form-control" id="bairro" name="bairro" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="Rua">Rua *</label>
-                                    <input type="text" class="form-control" id="rua" name="rua" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="numero_casa">Nº *</label>
-                                    <input type="text" class="form-control" id="numero_casa" name="numero_casa" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="complemento">Complemento *</label>
-                                    <input type="text" class="form-control" id="complemento" name="complemento" required>
-                                </div>
-                            </div>
+                           
                         </div>
                         <div class="row">
                             <div class="col-md-12">
