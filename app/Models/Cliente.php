@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class Cliente extends Authenticatable
 {
     use Notifiable;
-
+    protected $fillable = ['name', 'password', 'email'];
     protected $table = 'clients';
     protected $primaryKey = 'client_id';
     protected $hidden = ['password'];
@@ -31,7 +31,8 @@ class Cliente extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
-    public function scopeVerifyHasEmail($query, $email){
+    public function scopeVerifyHasEmail($query, $email)
+    {
         return $query->where('email', $email);
 
         $existingClient = Cliente::where('email', $value)->first();
@@ -41,5 +42,4 @@ class Cliente extends Authenticatable
             return redirect('/')->withErrors($errorMessage);
         }
     }
-    
 }

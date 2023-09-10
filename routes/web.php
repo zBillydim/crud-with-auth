@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\VeiculoController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\VeiculoController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,20 +34,27 @@ Route::get('/login', function () {
 
 /* FIM ROTAS PUBLICAS */
 
+
 /* INICIO ROTA AUTENTICADA */
 
 Route::middleware(['auth'])->group(function () {
+
+    /* INICIO VEICULO */
     Route::post('/createVehicle', [VeiculoController::class, 'create'])->name('create.vehicle');
     Route::get('/veiculo', [VeiculoController::class, 'index'])->name('cadastroveiculo');
+    /* FIM VEICULO */
 
-    Route::get('/perfil', function () {
-        return view('perfil');
-    })->name('perfil');
-    
+
+    /* INICIO PERFIL */
+    Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil');
+    Route::post('/change-password', [ClienteController::class, 'changePass']);
+    /* FIM PERFIL*/
+
+
+
     Route::get('/home', function () {
         return view('home');
     })->name('home');
 });
 
 /* FIM ROTA AUTENTICADA */
-

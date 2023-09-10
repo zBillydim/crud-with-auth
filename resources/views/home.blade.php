@@ -174,18 +174,31 @@
   </div>
 
 
-  <footer id="footer" class="bg-dark text-white text-center py-2 fixed-bottom">
-    <div class="container text-center">
-      <div class="col">
-        Desenvolvido por <a style="text-decoration: none;" href="https://github.com/zbillydim" target="_blank">Gabriel C.</a>
-        <br>
-        <a style="text-decoration: none;" href="https://github.com/zbillydim"><i class="fab fa-github github-icon"> Github</i></a>
-      </div>
+  <footer id="footer"class="bg-dark text-white text-center py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                    Desenvolvido por <a style="text-decoration: none;"href="https://github.com/zbillydim"  target="_blank">Gabriel C.</a>
+                <br>
+                <a style="text-decoration: none;" href="https://github.com/zbillydim"><i class="fab fa-github github-icon">  Github</i>  </a>
+            </div>
+        </div>
     </div>
-  </footer>
+</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    var footer = $('#footer');       
+    var windowWidth = $(window).height();
+            
+    if(windowWidth <= 768){
+        footer.addClass('bottom');
+        console.log('aq');
+    }else{
+        footer.addClass('fixed-bottom');
+        console.log('aqui');
+    }
+    
     function toggleForm(formId) {
       document.getElementById('veiculos').style.display = 'none';
       document.getElementById('registerForm').style.display = 'none';
