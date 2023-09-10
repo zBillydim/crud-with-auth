@@ -5,32 +5,45 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-    public function login(Request $request){
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['success' => "true"], 200);
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect('/veiculo');
         } else {
-            return response()->json(['error' => "Credenciais inválidas."], 400);
+            $errorMessage = 'Credenciais inválidas.';
+            return redirect('/')->withErrors($errorMessage);
         }
     }
 
-    public function register(Request $request){
-        $email = $request->input('email');
+    public function register(Request $request)
+    {
+        $emailExists = Cliente::verifyHasEmail($request->input('email'))->exists();
 
-        $existingClient = Cliente::where('email', $email)->first();
+        if (!$emailExists) {
+            $cliente = Cliente::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+            ]);
 
-        if ($existingClient) {
-            return response()->json(['error' => "Email já utilizado, por favor utilize outro."], 400);
+            if ($cliente) {
+                if (Auth::attempt($request->only('email', 'password'))) {
+                    Session::flash('register_success', 'Cadastro realizado com sucesso');
+                    return redirect('/veiculo');
+                }
+            }
+            $errorMessage = 'Erro ao tentar cadastrar usuário, tente novamente mais tarde.';
+
+            return redirect('/')->withErrors([$errorMessage]);
         }
 
-        Cliente::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ]);
+        $errorMessage = 'Email já utilizado, por favor utilize outro.';
 
-        return response()->json(['success' => "true"], 200);
+        return redirect('/')->withErrors([$errorMessage]);
     }
 }
