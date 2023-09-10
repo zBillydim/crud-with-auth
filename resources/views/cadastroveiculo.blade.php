@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criação de Veículos</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -85,7 +86,8 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="km_rodados">Km Rodados * </label>
-                                    <input type="text" class="form-control" id="km_rodados" name="km_rodados" required>
+                                    <span style="">(apenas números)</span>
+                                    <input type="text" class="form-control" id="km_rodados" name="km_rodados" maxlength="10" required>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -111,7 +113,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="cpf">CPF *</label>
-                                    <input type="text" class="form-control" id="cpf" placeholder="___.___.___-__" name="cpf" required>
+                                    <input type="text" class="form-control" id="cpf" placeholder="___.___.___-__" name="cpf" maxlength="11" required>
                                 </div>
                             </div>
                         </div>
@@ -119,11 +121,11 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="numero">Número celular/whatsapp</label>
-                                    <input type="text" class="form-control" id="numero" placeholder="(__) _____-____" name="numero" >
+                                    <input type="text" class="form-control" id="numero" placeholder="(__) _____-____" maxlength="11"  name="numero" >
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <div class="form-group">
+                                <div class="form-group">\
                                     <label for="status">Status *</label>
                                     <select class="form-control" id="status" name="status" required >
                                         <option value="Ativo">Ativo</option>
@@ -155,22 +157,19 @@
         </div>
     </footer>
     <script>
-        $(document).ready(function() {
-            $('#cpf').inputmask('999.999.999-99');
-            $('#numero').inputmask('(99) 99999-9999');
-            $('#cep').inputmask('99999-999');
-            $('#km_rodados').on('input', function() {
-                $(this).val($(this).val().replace(/\D/g, ''));
-            });
+        function fecha(event){
+            document.getElementById('alerta').style.display = 'none';
+        }
 
-            var footer = $('#footer');       
-            var windowWidth = $(window).height();
-                
-            if(windowWidth <= 768){
-                footer.addClass('bottom');
-            }else{
-                footer.addClass('fixed-bottom');
-            }
+        $(document).ready(function () {
+            $('#numero').mask('(00) 00000-0000');
+            $('#cpf').mask('000.000.000-00', { reverse: true });
+
+            $('#km_rodados').on('input', function() {
+                var valorAtual = $(this).val();
+                var valorNumerico = valorAtual.replace(/\D/g, '');
+                $(this).val(valorNumerico);
+            });
         });
     </script>
 </body>

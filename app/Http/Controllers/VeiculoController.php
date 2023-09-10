@@ -13,23 +13,27 @@ class VeiculoController extends Controller
     {
         return view('cadastroveiculo');
     }
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $token = csrf_token();
-        if($token != $request->input('_token')){
+        if ($token != $request->input('_token')) {
             $errorMessage = 'Token invalido';
             return redirect('/veiculo')->withErrors([$errorMessage]);
         }
+        $cpf = preg_replace('/\D/', '', $request->input('cpf'));
+        $numero = preg_replace('/\D/', '', $request->input('numero'));
+
         $model = new Vehicle();
         $createVechile = new CreateVehicleUseCase($model);
 
-        $return = $createVechile->execute($request->all());
+        $return = $createVechile->execute($request->all(), $cpf, $numero);
         $vehicle = json_decode($return, true);
 
-        if(!isset($vehicle['vehicle_id'])){
+        if (!isset($vehicle['vehicle_id'])) {
             Session::flash('failed_register', 'Falha ao cadastrar veículo');
             return redirect('/veiculo');
         }
-        
+
         Session::flash('register_success', 'Veículo cadastrado com sucesso');
         return redirect('/veiculo');
     }

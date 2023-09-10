@@ -50,6 +50,14 @@
     </nav>
     <br>
     <br>
+    @if(Session::has('success'))
+    <div id="alerta" class="alert alert-success mt-3 mx-auto" style="max-width: 300px;" role="alert">
+        {{ Session::get('success') }}
+        <a type="button" class="close" onclick="fecha(event)" data-dismiss="alert" style="margin-left: 50px; margin-bottom: 2px; text-decoration: none" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </a>
+    </div>
+    @endif
     @if($errors->any())
        
         <a id="error" style="display:none">{{ $errors->first() }}</a>
@@ -128,6 +136,11 @@
             document.getElementById('formModal').style.display = 'none';
             document.getElementById(formId).style.display = 'block';
         }
+
+        function fecha(event){
+            document.getElementById('alerta').style.display = 'none';
+        }
+
     </script>
 
 </body>

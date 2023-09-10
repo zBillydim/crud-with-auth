@@ -35,7 +35,7 @@ class ClienteController extends Controller
     {
         try {
             $currentUser = Cliente::find($user);
-            $currentUser->password = Hash::make($newPassword);
+            $currentUser->password = $newPassword;
             $currentUser->save();
         } catch (Exception $e) {
             throw new Exception("Ocorreu um erro ao alterar a senha, tente novamente");

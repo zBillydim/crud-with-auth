@@ -2,18 +2,19 @@
 
 namespace App\Http\UseCases;
 
-use App\Models\Cliente;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
 
 class CreateVehicleUseCase
 {
     private $vehicles;
-    public function __construct(Vehicle $vehicle){
+    public function __construct(Vehicle $vehicle)
+    {
         $this->vehicles = $vehicle;
     }
 
-    public function execute(array $data): string{
+    public function execute(array $data, int $cpf, int $numero): string
+    {
         $user = Auth::user();
 
         $vehicle_id = $this->vehicles->create([
@@ -23,8 +24,8 @@ class CreateVehicleUseCase
             'km_vehicle' => ($data['km_rodados'] ?? null),
             'combustivel_vehicle' => ($data['combustivel'] ?? null),
             'placa_vehicle' => ($data['placa'] ?? null),
-            'cpf_client' => ($data['cpf'] ?? null),
-            'numero_client' => ($data['numero'] ?? null),
+            'cpf_vehicle' => ($cpf ?? null),
+            'numero_client' => ($numero ?? null),
             'STATUS' => ($data['status'] ?? 'Desativado'),
         ]);
 
